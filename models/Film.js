@@ -21,11 +21,21 @@ const filmSchema = new mongoose.Schema({
     billboard: {type: String, default: 'no'},
     rating: String,
     image: String,
+    image_id: String, 
     trailer: String,
+    trailer_id: String,
     director: String,
     cast_names: [{type: String, default: '' }],
-    cast_images: { data: Buffer, type: String},
-    public_id: String
+    cast_image1: String,
+    cast_image_id1: String,
+    cast_image2: String,
+    cast_image_id2: String,
+    cast_image3: String,
+    cast_image_id3: String,
+    cast_image4: String,
+    cast_image_id4: String,
+    cast_image5: String,
+    cast_image_id5: String,
 }, 
 {
     timestamps: true

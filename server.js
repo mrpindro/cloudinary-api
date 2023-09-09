@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const fileupload = require('express-fileupload');
 const errorHandler = require('./middleware/errorHandler');
 const { logger, logEvents } = require('./middleware/logger');
 const corsOptions = require('./config/corsOption');
@@ -16,11 +17,13 @@ app.use(logger);
 
 connectDB();
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
+
+// app.use(fileupload({ useTempFiles: true }));
 
 // run();
 

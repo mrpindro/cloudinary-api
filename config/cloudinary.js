@@ -6,22 +6,37 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
-const uploadToCloudinary = (path, folder) => {
-    return cloudinary.uploader.upload(path, {
-        folder
-    })
-        .then((data) => {
-            return {url: data.url, public_id: data.public_id}
-        }).catch((error) => {
-            console.log(error);
+
+const uploads = (file, folder) => {
+    return new Promise(resolve => {
+        cloudinary.uploader.upload(file, (result) => {
+            resolve({
+                url: result.secure_url,
+            })
+        }, {
+            resource_type: "auto",
+            folder: folder
         })
-    ;
-}
-
-const removeFromCloudinary = async (public_id) => {
-    await cloudinary.uploader.destroy(public_id, (error, result) => {
-        console.log(result, error)
     })
 }
 
-module.exports = { cloudinary, uploadToCloudinary, removeFromCloudinary };
+
+// const uploadToCloudinary = (path, folder) => {
+//     return cloudinary.uploader.upload(path, {
+//         folder
+//     })
+//         .then((data) => {
+//             return {url: data.url, public_id: data.public_id}
+//         }).catch((error) => {
+//             console.log(error);
+//         })
+//     ;
+// }
+
+// const removeFromCloudinary = async (public_id) => {
+//     await cloudinary.uploader.destroy(public_id, (error, result) => {
+//         console.log(result, error)
+//     })
+// }
+
+module.exports = { cloudinary, uploads};
